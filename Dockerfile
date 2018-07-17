@@ -22,10 +22,11 @@ LABEL about.tags="Genomics"
 LABEL maintainer="brainstorm@nopcode.org"
 
 ################## INSTALLATION ######################
-USER biodocker
+USER root
+RUN apt-get update && apt-get install -y megatools
 
-# XXX: Brittle release engineering, since download keys rotate here, please 10X fix this.
-RUN wget -O longranger-"$VERSION".tar.gz "https://mega.nz/#!HpxXwTbS!INCKJNHD_PFx-lHVKHFDcMaEUdoGavnxb7zXQ5UCTT8"
+USER biodocker
+RUN	megadl "https://mega.nz/#!HpxXwTbS!INCKJNHD_PFx-lHVKHFDcMaEUdoGavnxb7zXQ5UCTT8"
 
 # Untar (spray tarball under $HOME)
 ADD longranger-"$VERSION".tar.gz "$HOME"
