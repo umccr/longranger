@@ -2,9 +2,9 @@
 	path = lib/stan/cmdstan
 	url = https://github.com/stan-dev/cmdstan.git
 	ignore = dirty
-[submodule "lib/lariat"]
-	path = lib/lariat
-	url = https://github.com/10XGenomics/lariat.git
+#[submodule "lib/lariat"]
+#	path = lib/lariat
+#	url = https://github.com/10XGenomics/lariat.git
 [submodule "lib/go/src/github.com/codegangsta/cli"]
 	path = lib/go/src/github.com/codegangsta/cli
 	url = https://github.com/urfave/cli.git
