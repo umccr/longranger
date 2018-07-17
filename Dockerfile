@@ -26,13 +26,12 @@ USER root
 RUN apt-get update && apt-get install -y megatools
 
 USER biodocker
-RUN	megadl "https://mega.nz/#!HpxXwTbS!INCKJNHD_PFx-lHVKHFDcMaEUdoGavnxb7zXQ5UCTT8"
+WORKDIR /home/biodocker
+RUN megadl "https://mega.nz/#!HpxXwTbS!INCKJNHD_PFx-lHVKHFDcMaEUdoGavnxb7zXQ5UCTT8"
 
-# Untar (spray tarball under $HOME)
-ADD longranger-"$VERSION".tar.gz "$HOME"
-
-# Repurpose sourceme.bash so that it acts as a longranger wrapper under $HOME/bin
-RUN cp "$HOME"/longranger-"$VERSION"/sourceme.bash $HOME/bin/longranger && \
+# Untar longranger and repurpose sourceme.bash so that it acts as a longranger wrapper under $HOME/bin
+RUN tar xvfz longranger-"$VERSION".tar.gz && \
+    cp "$HOME"/longranger-"$VERSION"/sourceme.bash $HOME/bin/longranger && \
     echo "$HOME"/longranger-"$VERSION"/longranger '$@' >> $HOME/bin/longranger && \
     chmod +x $HOME/bin/longranger && \
     sed -i '1 i\#\!\/bin\/bash' $HOME/bin/longranger && \
